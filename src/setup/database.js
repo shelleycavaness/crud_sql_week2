@@ -6,13 +6,13 @@ const connection = mysql.createConnection({
     user: databaseConfig.development.username,
     password: databaseConfig.development.password,
     database: databaseConfig.development.database,
-//    socketPath: databaseConfig.development.socketPath
+   socketPath: databaseConfig.development.socketPath
 });
 
 //Connecting to database
 connection.connect((err) => {
     if (err) {
-        console.error("error connecting: " + err.stack);
+        console.error("*****error connecting: " + err.stack);
         return;
     }
 

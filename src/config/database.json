@@ -1,11 +1,11 @@
 {
     "development": {
       "username": "root",
-      "password": "",
-      "database": "cprok_portfolio",
+      "password": "password",
+      "database": "ecoDatabases",
       "host": "localhost",
-      "dialect": "mysql",
-      "socketPath": "/Applications/MAMP/tmp/mysql/mysql.sock"
+      "dialect": "mysql"
+
     },
     "production": {
       "username": "root",
