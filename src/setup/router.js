@@ -4,6 +4,9 @@ import projectRoutes from "../modules/project/routes"
 import userRoutes from "../modules/user/routes"
 import pageRoutes from "../modules/page/routes"
 
+import actionRoutes from "../modules/actions/routes";
+
+
 const Router = (app) => {
     var apiRoutes = express.Router();
 
@@ -18,6 +21,8 @@ const Router = (app) => {
     app.use('/api/projects', projectRoutes);
     app.use('/api/pages', pageRoutes);
     app.use('/api/users', userRoutes);
+    
+    app.use('/api/actions', actionRoutes );
 }
 
 export default Router
