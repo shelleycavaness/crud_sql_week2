@@ -1,0 +1,20 @@
+
+1. express sever
+2. docker-compose.yml up     pasted an mysql container 
+
+
+3. a. then ran `docker-compose up` in new terminal
+   b. In a new terminal ran terminal docker exec -it 
+	`docker exec -it container_name(quintin_crud_db_1) /bin/bash`
+   c.`mysql -u user -p` (then had to enter password for database found in the docker file.)
+
+Then enter `mysql -p` or 
+docker exec -it quintin_crud_db_1  "mysql" "-p". 
+(Or the container Number : docker exec -it `my_ps_container_number`  /bin/bash  )
+once you have the mysql running you can do the sql commands in ternminal
+///////////////////////////////////////////////////////////////////////////////////////
+or
+run sequel pro in mac instead ;-)
+
+
+
