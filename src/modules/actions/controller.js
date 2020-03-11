@@ -2,11 +2,13 @@ import  { getAllActions, createOneAction, getActionById, UpdateAction } from "./
 
 
 export const actionsGetAll = (req, res) => {
-  getAllActions(req, results => {
-    //will be executed once the service is finished 
-    results.success ? res.status(200).send(results) : res.status(404).send(results)
-   })  
- }
+  console.log("GETALLACTIONS");
+  getAllActions().then((results) => {
+    results ? res.status(200).send(results) : res.status(404).send(results) // should be an error code (no return from database)
+  }).catch((err) => {
+    console.log(err);
+  });
+ } 
 
  export const getActionsById = (req, res) => {
   getActionById(req.params.id, results => {
@@ -24,14 +26,10 @@ export const postNewAction = (req, res ) => {
 }
 
 export const postUpdatedAction = (req, res) =>{
-    UpdateAction(req.params.id, results => {
-      console.log('222222222222222222222222222222222222222')  
-      if(!results.success) {
-        console.log('error update controler')  
-        res.status(404).send(results) 
-      } else {
-        console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%')  
-        res.status(200).send(results)
-      }  
-  })
+    UpdateAction(req.body, req.params.id)
+    .then( results => res.status(200).send(results))
+    .catch((err) => {
+      res.status(500).send("post updated action unsucessful")
+      console.log(err)
+    })
 }
