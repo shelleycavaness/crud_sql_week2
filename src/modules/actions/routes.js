@@ -1,10 +1,11 @@
 import express from "express";
 const router = express.Router();
 
-import {  actionsGetAll, getActionsById, postNewAction, postUpdatedAction } from "./controller";
+import {  actionsGetAll, getActionsById, postNewAction, postUpdatedAction, deleteAnAction } from "./controller";
 //Private routes
 router.post('/save', postNewAction)  
 router.put('/:id', postUpdatedAction )
+router.delete('/:id', deleteAnAction)
 
 //Public routes
 
