@@ -1,4 +1,4 @@
-import  { getAllActions, createOneAction, getActionById, UpdateAction } from "./service"
+import  { getAllActions, createOneAction, getActionById, UpdateAction, DeleteAction } from "./service"
 
 
 export const actionsGetAll = (req, res) => {
@@ -10,11 +10,10 @@ export const actionsGetAll = (req, res) => {
   });
  } 
 
- export const getActionsById = (req, res) => {
-  getActionById(req.params.id, results => {
-    //console.log('coucou')  
-    results.success ? res.status(200).send(results) : res.status(404).send(results)  
-  })  
+export const getActionsById = (req, res) => {
+  getActionById(req.params.id) 
+    .then((results) => res.status(200).send(results))
+    .catch( (err) => res.status(404).send(err) )
 }
 
 export const postNewAction = (req, res ) => {
@@ -32,4 +31,13 @@ export const postUpdatedAction = (req, res) =>{
       res.status(500).send("post updated action unsucessful")
       console.log(err)
     })
+}
+
+export const deleteAnAction = (req, res) => {
+  DeleteAction(req.params.id)
+  .then(results => res.status(204).send({}))
+  .catch((err) =>{
+    res.status(500).send("delete unsucessful")
+    console.log(err)
+  })
 }
