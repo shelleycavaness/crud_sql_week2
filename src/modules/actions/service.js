@@ -2,14 +2,14 @@ import db from "../../setup/database";
 
 export const getAllActions = () => {
   return new Promise((resolve, reject) => {
-    let sqlQuery = "SELECT * FROM `eco_actions`";
+    let sqlQuery = "SELECT * FROM `actions`";
 
     db.query(sqlQuery, (err, rows) => {
       if(err) { 
         console.log("ERROR", err);
         reject(err)
-    }
-    console.log("ROWS", rows);
+      }
+    // console.log("ROWS", rows);
       if(rows.length > 0){
         resolve(rows)  
       } else {
@@ -23,18 +23,18 @@ export const getAllActions = () => {
 
 export const getActionById = (id) => {
  return new Promise((resolve, reject) => {
-  let sqlQuery = `SELECT * FROM eco_actions WHERE ID=${id}`;
+  let sqlQuery = `SELECT * FROM actions WHERE ID=${id}`;
 
   db.query(sqlQuery, (err, rows) => {
     if(err) { 
-        console.log( "ERROR", err);
-        reject(err)
-        }
+      console.log( "ERROR", err);
+      reject(err)
+    }
     if(rows.length > 0) { 
-        resolve(rows[0])
-        }
+      resolve(rows[0])
+    }
     else{ 
-        resolve('no matching id') 
+      resolve('no matching id') 
     }   
   })  
  })
@@ -42,16 +42,17 @@ export const getActionById = (id) => {
 
 export const createOneAction = (body) => {  
   return new Promise ((resolve, reject) => {
-    let sqlQuery = `INSERT INTO eco_actions 
-    (id, action_title, action_description, action_impact) VALUES (NULL, "${body.action_title}", "${body.action_description}", "${body.action_impact}");`;
+    let sqlQuery = `INSERT INTO actions 
+    (id, title, description, impact) VALUES (NULL, "${body.title}", 
+    "${body.description}", "${body.impact}");`;
     db.query(sqlQuery, (err, res) => {
         if(err) {
-            console.log('****************', err)
-            reject(err) 
+          console.log('****************', err)
+          reject(err) 
         }
         else {
-            console.log('fffffffffffffff', res)
-            resolve(res);
+          console.log('fffffffffffffff', res)
+          resolve(res);
         }
       }) 
     })  
@@ -59,8 +60,8 @@ export const createOneAction = (body) => {
 
 export const UpdateAction = (body, id) => {
     return new Promise ((resolve, reject) => {
-      let sqlQuery = `UPDATE  eco_actions 
-      SET action_title="${body.action_title}", action_description="${body.action_description}", action_impact="${body.action_impact}" 
+      let sqlQuery = `UPDATE  actions 
+      SET title="${body.title}", description="${body.description}", impact="${body.impact}" 
       WHERE id=${id};`
       db.query(sqlQuery, (err, result) =>{
         if(err){
@@ -74,7 +75,7 @@ export const UpdateAction = (body, id) => {
 }
 export const DeleteAction = (id) => {
   return new Promise((resolve, reject) => {
-    let sqlQuery = `DELETE from eco_actions 
+    let sqlQuery = `DELETE from actions 
     WHERE id=${id};`
     db.query(sqlQuery, (err, result) => {
       if(err){
